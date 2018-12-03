@@ -1,0 +1,9 @@
+trigger myContactTrigger on Contact (before insert) {
+	
+    /* automatically changes a Contact's email address to "hello@world.com" 
+     * when a Contact is created
+     */
+    for(Contact c : Trigger.new){
+        c.Email = 'hello@world.com' ;
+    }
+}
