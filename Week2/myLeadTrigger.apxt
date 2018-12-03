@@ -1,0 +1,15 @@
+trigger myLeadTrigger on Lead (after insert) {
+    
+    for (Lead alead : Trigger.new ){
+        
+        Account acc = new Account();
+        
+        acc.Name            = alead.LastName;
+        acc.Phone           = alead.MobilePhone;
+        acc.ShippingStreet  = alead.Street;
+        
+        insert acc;       
+        
+    }
+    
+}
