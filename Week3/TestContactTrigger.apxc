@@ -1,0 +1,19 @@
+@isTest 
+public class TestContactTrigger {
+    static testMethod void updateEmail(){
+        Contact c = new Contact();
+        
+        // Define all required fields 
+        c.FirstName = 'Chi';
+        c.LastName	= 'N';
+        c.Phone		= '0983737333';
+        
+        // DML
+        insert c;
+        
+        // Check is it working 
+        List<Contact> ls = [SELECT EMAIL FROM CONTACT WHERE PHONE =: C.Phone AND EMAIL='hello@world.com'];
+        System.assert( ls.size()>0 );
+	}
+
+}
