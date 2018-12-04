@@ -1,0 +1,19 @@
+@isTest
+public class TestLeadTrigger {
+    static testMethod void createAccount(){
+        Lead ld = new Lead();
+        
+        ld.FirstName	= 'Chi';
+        ld.LastName		= 'Nguyen';
+        ld.MobilePhone	= '0973737373' ;
+        
+        insert ld;
+        
+        // Check is Account Name named the lastname of the Lead
+        List<Account> acc = [SELECT NAME FROM ACCOUNT WHERE NAME =: ld.LastName AND PHONE =: ld.MobilePhone ];
+        
+        System.assert( acc.size() > 1 );
+                
+    }
+
+}
