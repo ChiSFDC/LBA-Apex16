@@ -1,0 +1,29 @@
+trigger myAccountTrigger on Account (after insert) {
+	
+    // Create a list of associated opportunities
+    List<Opportunity> associatedOpps = new List<Opportunity>();
+    
+    for (Account newAcc : Trigger.new){
+        // For each newAcc, we create 2 associated Opps 
+        // Create the 1st Opportunity        
+        Opportunity opp1 = new Opportunity();
+        opp1.AccountId	= newAcc.Id;
+        opp1.Name		= 'Opp'+newAcc.Name+'1';
+        opp1.StageName	= 'Prospecting';
+        opp1.CloseDate	= System.today().addMonths(1);
+        
+        associatedOpps.add(opp1);
+        
+        // Create the 2nd Opportunity
+        Opportunity opp2 = new Opportunity();
+        opp2.AccountId	= newAcc.Id;
+        opp2.Name		= 'Opp'+newAcc.Name+'2';
+        opp2.StageName	= 'Prospecting';
+        opp2.CloseDate	= System.today().addMonths(1);
+        
+        associatedOpps.add(opp2);        
+    }
+    // Insert all opportunities that are associated with all new accounts
+    // associatedOpps's size may have more than 2 and also be even
+    insert associatedOpps;   
+}
