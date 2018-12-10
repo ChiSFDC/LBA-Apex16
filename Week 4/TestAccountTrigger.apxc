@@ -5,11 +5,10 @@ public class TestAccountTrigger {
         //Init a test account
         Account acct = TestDataFactory.createAccounts(1)[0];
         insert acct;
-        String acct_name  = acct.Name;
-                       
+                               
         Test.startTest();
         
-        // Retrive the opportunities that are associated with the account
+        // Retrieve the opportunities that are associated with the account
         List<Opportunity> associatedOpps = [SELECT NAME FROM OPPORTUNITY WHERE ACCOUNTID =: acct.Id];
         
         Test.stopTest();
