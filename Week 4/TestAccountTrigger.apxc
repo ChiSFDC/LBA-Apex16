@@ -1,0 +1,20 @@
+@isTest
+public class TestAccountTrigger {
+    @isTest private static void associatedOppsWithAccount(){
+        
+        //Init a test account
+        Account acct = TestDataFactory.createAccounts(1)[0];
+        insert acct;
+        String acct_name  = acct.Name;
+                       
+        Test.startTest();
+        
+        // Retrive the opportunities that are associated with the account
+        List<Opportunity> associatedOpps = [SELECT NAME FROM OPPORTUNITY WHERE ACCOUNTID =: acct.Id];
+        
+        Test.stopTest();
+        
+        // Check if there're 2 opps created
+        System.assert(associatedOpps.size()==2);
+    }
+}
